@@ -1,0 +1,8 @@
+.git
+.morgul
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+data
+tests

@@ -1,0 +1,35 @@
+[project]
+name = "lacuna-stats-worker"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "matplotlib==3.11.2",
+    "msgspec>=0.22.0",
+]
+
+[dependency-groups]
+dev = [
+    "basedpyright>=1.40.2",
+    "black>=26.10.1",
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.basedpyright]
+include = ["*.py", "tests"]
+exclude = ["**/.venv", "**/venv", "**/dist", "**/build"]
+reportUnusedCallResult = "none"
+reportAny = "none"
+reportExplicitAny = "none"
+reportUnknownVariableType = "none"
+reportUnknownMemberType = "none"
+reportUnknownArgumentType = "none"
+reportMissingTypeArgument = "hint"
+failOnWarnings = false
+
+[tool.black]
+line-length = 120
+target-version = ["py313"]

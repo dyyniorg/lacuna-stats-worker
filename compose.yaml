@@ -1,0 +1,12 @@
+services:
+  lacuna-stats-worker:
+    build: .
+    env_file: .env
+    ports:
+      - "0.0.0.0:${PORT:-8000}:8000"
+    volumes:
+      - lacuna-data:/data
+    restart: unless-stopped
+
+volumes:
+  lacuna-data:
