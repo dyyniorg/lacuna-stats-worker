@@ -4,11 +4,11 @@ Handles stats events sent from [lacuna](https://github.com/dyyniorg/lacuna) over
 
 ## Endpoints
 
-- `POST /api/lacuna/stats` accepts one event
+- `POST /lacuna/stats` accepts one event
     - Requires `Authorization: Bearer <token>`
     - De-duplicates retried pushes based on `event_id`
-- `GET /chart.png` returns the rendered chart
-- `GET /healthz` returns `ok`
+- `GET /lacuna/chart.png` returns the rendered chart
+- `GET /lacuna/healthz` returns `ok`
 
 ## Environment variables
 
