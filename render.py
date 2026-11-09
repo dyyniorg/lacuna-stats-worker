@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import logging
 import os
 import sys
 import time
@@ -22,8 +21,6 @@ FRAME_COLOR = "#334155"
 TEXT_COLOR = "#E5E7EB"
 BACKGROUND_COLOR = "#0B0F19"
 AXES_COLOR = "#111827"
-
-logger = logging.getLogger(__name__)
 
 
 def _smooth_dates(date_numbers: list[float], samples_per_day: int = 12) -> list[float]:
@@ -212,6 +209,7 @@ def render_chart(settings: store.Settings) -> None:
         figure.clear()
 
     store.save_render_state(settings, max_rowid, event_count)
+    print(f"rendered chart for {event_count} events", flush=True)
 
 
 def render_conditionally(settings: store.Settings, force: bool = False) -> bool:
@@ -245,8 +243,8 @@ def run_render_loop(settings: store.Settings) -> None:
     while True:
         try:
             render_conditionally(settings)
-        except Exception:
-            logger.exception("render check failed")
+        except Exception as error:
+            print(f"render check failed: {error}", flush=True)
 
         time.sleep(settings.render_check_seconds)
 

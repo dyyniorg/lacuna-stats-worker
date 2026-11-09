@@ -118,9 +118,9 @@ def initialize_database(settings: Settings) -> None:
         connection.commit()
 
 
-def insert_event(settings: Settings, event: Event) -> None:
+def insert_event(settings: Settings, event: Event) -> bool:
     with closing(connect(settings)) as connection:
-        connection.execute(
+        cursor = connection.execute(
             """
             INSERT OR IGNORE INTO events (
                 event_id,
@@ -156,6 +156,8 @@ def insert_event(settings: Settings, event: Event) -> None:
             ),
         )
         connection.commit()
+
+        return cursor.rowcount > 0
 
 
 def get_event_totals(settings: Settings) -> tuple[int, int, int]:

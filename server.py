@@ -99,7 +99,8 @@ class StatsHandler(BaseHTTPRequestHandler):
             self._send_text(400, "request body is not valid JSON\n")
             return
 
-        store.insert_event(self.settings, event)
+        if store.insert_event(self.settings, event):
+            print(f"stored event {event.event_id}", flush=True)
 
         self.send_response(204)
         self.send_header("Content-Length", "0")
