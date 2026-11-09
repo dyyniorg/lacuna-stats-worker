@@ -108,7 +108,11 @@ class StatsHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self) -> None:
-        if self.path == "/chart.png":
+        if self.path == "/lacuna/healthz":
+            self._send_bytes(200, "text/plain", b"ok\n")
+            return
+
+        if self.path == "/lacuna/chart.png":
             try:
                 body = self.settings.chart_path.read_bytes()
             except FileNotFoundError:

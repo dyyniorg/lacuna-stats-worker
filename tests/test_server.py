@@ -97,9 +97,13 @@ def test_server_endpoints(tmp_path: Path) -> None:
         status, _ = request(port, "POST", "/lacuna/stats", b"x" * 1025, headers)
         assert status == 413
 
+        status, response_body = request(port, "GET", "/lacuna/healthz")
+        assert status == 200
+        assert response_body == b"ok\n"
+
         chart_bytes = b"\x89PNG\r\n\x1a\nchart"
         settings.chart_path.write_bytes(chart_bytes)
-        status, response_body = request(port, "GET", "/chart.png")
+        status, response_body = request(port, "GET", "/lacuna/chart.png")
         assert status == 200
         assert response_body == chart_bytes
 
