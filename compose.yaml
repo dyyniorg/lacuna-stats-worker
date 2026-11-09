@@ -1,6 +1,7 @@
 services:
   lacuna-stats-worker:
     build: .
+    container_name: lacuna-stats-worker
     env_file: .env
     ports:
       - "0.0.0.0:${PORT:-8000}:8000"
