@@ -14,7 +14,7 @@ if [[ ! -f .env ]]; then
     exit 1
 fi
 
-rsync -avz \
+rsync -avz --relative \
     .containerignore \
     .env \
     Containerfile \
@@ -24,4 +24,5 @@ rsync -avz \
     server.py \
     store.py \
     uv.lock \
+    scripts/run.sh \
     "$1"
