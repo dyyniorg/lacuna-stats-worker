@@ -21,6 +21,9 @@ class StatsHandler(BaseHTTPRequestHandler):
     def settings(self) -> store.Settings:
         return cast("StatsServer", self.server).settings
 
+    def address_string(self) -> str:
+        return self.headers.get("CF-Connecting-IP") or super().address_string()
+
     def _send_bytes(
         self,
         status: int,
